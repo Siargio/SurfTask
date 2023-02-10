@@ -7,35 +7,30 @@
 
 import UIKit
 
-struct Appearance {
-    var leading: CGFloat { 20 }
-    var trailing: CGFloat { -20 }
-    var top: CGFloat { 24 }
-    var topSecond: CGFloat { 12 }
-    var heightButton: CGFloat { 60 }
-    var joinButtonWidth: CGFloat { 0.59 }
-    var sizeFontDisplayBold: CGFloat { 24 }
-    var heightFirstCollectionView: CGFloat { 0.055 }
-    var heightSecondCollectionView: CGFloat  { 0.125 }
-}
+final class PresentationView: UIView {
 
-enum Strings {
-    static let titleLabelText: String = "Стажировка в Surf"
-    static let descriptionInfoLabel = "Работай над реальными задачами под руководством опытного наставника и получи возможность стать частью команды мечты."
-    static let descriptionInfoSecondLabel = "Получай стипендию, выстраивай удобный график, работай на современном железе."
-    static let doYouWantButtonText = "Хочешь к нам?"
-    static let joinButtonText = "Отправить заявку"
-}
-
-final class PresentationController: UIView {
-
-    let appearance = Appearance()
     let collectionView = CollectionView()
     let collectionViewSecond = CollectionViewSecond()
+    var bottomHeight = NSLayoutConstraint()
 
     // MARK: - UIElements
 
-    private let doYouWantLabel = UILabel(
+    private let backgroundImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = Strings.backgroundImage
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    lazy var presentationView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = Metrics.viewCornerRadius
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let doYouWantLabel = UILabel(
         textAlignment: .center,
         text: Strings.doYouWantButtonText,
         font: .proDisplayRegular14(),
@@ -45,26 +40,31 @@ final class PresentationController: UIView {
         text: Strings.joinButtonText,
         font: .proDisplayMedium16())
 
-    private let titleLabel = UILabel(
+    let titleLabel = UILabel(
         text: Strings.titleLabelText,
         font: .proDisplayBold24(),
         textColor: CommonColor.customBlack)
 
-    private let descriptionInfoLabel = UILabel(
+    let descriptionInfoLabel = UILabel(
         text: Strings.descriptionInfoLabel,
         font: .proDisplayRegular14(),
         textColor: CommonColor.customGrayTex)
 
-    private let descriptionInfoSecondLabel = UILabel(
+    let descriptionInfoSecondLabel = UILabel(
+        alpha: Metrics.alpha,
         text: Strings.descriptionInfoSecondLabel,
         font: .proDisplayRegular14(),
         textColor: CommonColor.customGrayTex)
+
+    lazy var recognizer: UIPanGestureRecognizer = {
+        let recognizer = UIPanGestureRecognizer()
+        return recognizer
+    }()
 
     // MARK: - LifeCycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
 
         setupHierarchy()
         setupLayout()
@@ -76,49 +76,94 @@ final class PresentationController: UIView {
 
     // MARK: - Setup
 
-    func setupHierarchy() {
-        addSubview(titleLabel)
-        addSubview(descriptionInfoLabel)
-        addSubview(descriptionInfoSecondLabel)
-        addSubview(doYouWantLabel)
-        addSubview(joinButton)
-        addSubview(collectionView)
-        addSubview(collectionViewSecond)
+    private func setupHierarchy() {
+        addSubview(backgroundImage)
+        addSubview(presentationView)
+
+        presentationView.addSubview(titleLabel)
+        presentationView.addSubview(descriptionInfoLabel)
+        presentationView.addSubview(descriptionInfoSecondLabel)
+        presentationView.addSubview(doYouWantLabel)
+        presentationView.addSubview(joinButton)
+        presentationView.addSubview(collectionView)
+        presentationView.addSubview(collectionViewSecond)
+
+        presentationView.addGestureRecognizer(recognizer)
     }
 
-    func setupLayout() {
+    private func setupLayout() {
+        bottomHeight = presentationView.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: Metrics.heightButton)
+
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: appearance.top),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.leading),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: appearance.trailing),
+            backgroundImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            backgroundImage.topAnchor.constraint(equalTo: topAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            descriptionInfoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: appearance.topSecond),
-            descriptionInfoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.leading),
-            descriptionInfoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: appearance.trailing),
+            presentationView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            presentationView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            presentationView.heightAnchor.constraint(equalTo: heightAnchor),
+            bottomHeight,
 
-            descriptionInfoSecondLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: appearance.top),
-            descriptionInfoSecondLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.leading),
-            descriptionInfoSecondLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: appearance.trailing),
+            titleLabel.topAnchor.constraint(equalTo: presentationView.topAnchor, constant: Metrics.top),
+            titleLabel.leadingAnchor.constraint(equalTo: presentationView.leadingAnchor, constant: Metrics.leading),
+            titleLabel.trailingAnchor.constraint(equalTo: presentationView.trailingAnchor, constant: Metrics.trailing),
 
-            doYouWantLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.leading),
+            descriptionInfoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.topSecond),
+            descriptionInfoLabel.leadingAnchor.constraint(equalTo: presentationView.leadingAnchor, constant: Metrics.leading),
+            descriptionInfoLabel.trailingAnchor.constraint(equalTo: presentationView.trailingAnchor, constant: Metrics.trailing),
+
+            descriptionInfoSecondLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: Metrics.top),
+            descriptionInfoSecondLabel.leadingAnchor.constraint(equalTo: presentationView.leadingAnchor, constant: Metrics.leading),
+            descriptionInfoSecondLabel.trailingAnchor.constraint(equalTo: presentationView.trailingAnchor, constant: Metrics.trailing),
+
+            doYouWantLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.leading),
             doYouWantLabel.trailingAnchor.constraint(equalTo: joinButton.leadingAnchor),
-            doYouWantLabel.heightAnchor.constraint(equalToConstant: appearance.heightButton),
+            doYouWantLabel.heightAnchor.constraint(equalToConstant: Metrics.heightButton),
             doYouWantLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
 
-            joinButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: appearance.trailing),
-            joinButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: appearance.joinButtonWidth),
-            joinButton.heightAnchor.constraint(equalToConstant: appearance.heightButton),
+            joinButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Metrics.trailing),
+            joinButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: Metrics.joinButtonWidth),
+            joinButton.heightAnchor.constraint(equalToConstant: Metrics.heightButton),
             joinButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
 
-            collectionView.topAnchor.constraint(equalTo: descriptionInfoLabel.bottomAnchor, constant: appearance.topSecond),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.leading),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: appearance.trailing),
-            collectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: appearance.heightFirstCollectionView),
+            collectionView.topAnchor.constraint(equalTo: descriptionInfoLabel.bottomAnchor, constant: Metrics.topSecond),
+            collectionView.leadingAnchor.constraint(equalTo: presentationView.leadingAnchor, constant: Metrics.leading),
+            collectionView.trailingAnchor.constraint(equalTo: presentationView.trailingAnchor, constant: Metrics.trailing),
+            collectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Metrics.heightFirstCollectionView),
 
-            collectionViewSecond.topAnchor.constraint(equalTo: descriptionInfoSecondLabel.bottomAnchor, constant: appearance.topSecond),
-            collectionViewSecond.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.leading),
-            collectionViewSecond.trailingAnchor.constraint(equalTo: trailingAnchor, constant: appearance.trailing),
-            collectionViewSecond.heightAnchor.constraint(equalTo: heightAnchor, multiplier: appearance.heightSecondCollectionView)
+            collectionViewSecond.topAnchor.constraint(equalTo: descriptionInfoSecondLabel.bottomAnchor, constant: Metrics.topSecond),
+            collectionViewSecond.leadingAnchor.constraint(equalTo: presentationView.leadingAnchor, constant: Metrics.leading),
+            collectionViewSecond.trailingAnchor.constraint(equalTo: presentationView.trailingAnchor, constant: Metrics.trailing),
+            collectionViewSecond.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Metrics.heightSecondCollectionView)
         ])
+    }
+}
+
+// MARK: - Metrics
+
+extension PresentationView {
+    enum Metrics {
+        static let leading : CGFloat =  20
+        static let trailing: CGFloat =  -20
+        static let top: CGFloat = 24
+        static let topSecond: CGFloat = 12
+        static let heightButton: CGFloat = 60
+        static let joinButtonWidth: CGFloat = 0.59
+        static let sizeFontDisplayBold: CGFloat = 24
+        static let viewCornerRadius: CGFloat = 32
+        static let alpha: CGFloat = 0
+        static let bottomHeight: CGFloat = 40
+        static let heightFirstCollectionView: CGFloat = 0.055
+        static let heightSecondCollectionView: CGFloat = 0.125
+    }
+
+    enum Strings {
+        static let backgroundImage = UIImage(named: "background")
+        static let titleLabelText = "Стажировка в Surf"
+        static let descriptionInfoLabel = "Работай над реальными задачами под руководством опытного наставника и получи возможность стать частью команды мечты."
+        static let descriptionInfoSecondLabel = "Получай стипендию, выстраивай удобный график, работай на современном железе."
+        static let doYouWantButtonText = "Хочешь к нам?"
+        static let joinButtonText = "Отправить заявку"
     }
 }

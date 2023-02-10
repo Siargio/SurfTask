@@ -11,18 +11,17 @@ final class CollectionViewSecond: UIView {
 
     // MARK: - Properties
 
-    let viewCell = CollectionViewCell()
-    let modelArray = Model.item
+    var modelArray = Model.item
 
     // MARK: - UIElements
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 12
+        layout.minimumInteritemSpacing = Metrics.minimumInteritemSpacing
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
+        collectionView.alpha = Metrics.alpha
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -44,13 +43,13 @@ final class CollectionViewSecond: UIView {
 
     // MARK: - Setup
 
-    func setupHierarchy() {
+    private func setupHierarchy() {
         translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(collectionView)
     }
 
-    func setDelegates() {
+    private func setDelegates() {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
@@ -75,13 +74,20 @@ extension CollectionViewSecond: UICollectionViewDataSource {
     }
 }
 
-//// MARK: - UICollectionViewDelegate
-//
-//extension CollectionViewSecond: UICollectionViewDelegate {
-//
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    }
-//}
+// MARK: - UICollectionViewDelegate
+
+extension CollectionViewSecond: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedItem = modelArray[indexPath.item]
+        modelArray.remove(at: indexPath.item)
+        modelArray.insert(selectedItem, at: 0)
+
+        collectionView.moveItem(at: indexPath, to: IndexPath(item: 0, section: 0))
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
+        collectionView.reloadData()
+    }
+}
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
@@ -90,7 +96,7 @@ extension CollectionViewSecond: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let item = modelArray[indexPath.item]
-        return CGSize(width: item.size(withAttributes: [NSAttributedString.Key.font : UIFont.proDisplayMedium14() ?? ""]).width + 48, height: frame.height / 2.3)
+        return CGSize(width: item.size(withAttributes: [NSAttributedString.Key.font : UIFont.proDisplayMedium14() ?? Strings.fallbackFont]).width + Metrics.additionalWidth, height: frame.height / Metrics.heightDivision)
     }
 }
 
@@ -98,12 +104,27 @@ extension CollectionViewSecond: UICollectionViewDelegateFlowLayout {
 
 extension CollectionViewSecond {
 
-    func setupLayout() {
+    private func setupLayout() {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+}
+
+// MARK: - Metrics
+
+extension CollectionViewSecond {
+    enum Metrics {
+        static let minimumInteritemSpacing: CGFloat =  12
+        static let alpha: CGFloat = 0
+        static let additionalWidth: CGFloat = 48
+        static let heightDivision: CGFloat = 2.3
+    }
+
+    enum Strings {
+        static let fallbackFont = "Avenir Next"
     }
 }

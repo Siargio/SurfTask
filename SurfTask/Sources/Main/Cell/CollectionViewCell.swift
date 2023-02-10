@@ -15,7 +15,7 @@ final class CollectionViewCell: UICollectionViewCell {
 
     var isActive: Bool = false {
         didSet {
-            toggleColors()
+            changesColorsCell()
         }
     }
 
@@ -52,7 +52,7 @@ final class CollectionViewCell: UICollectionViewCell {
 
     private func setupView() {
         backgroundColor = CommonColor.customGray
-        layer.cornerRadius = 12
+        layer.cornerRadius = Metrics.cellCornerRadius
         layer.masksToBounds = true
     }
 
@@ -60,7 +60,7 @@ final class CollectionViewCell: UICollectionViewCell {
         addSubview(infoCellLabel)
     }
 
-    private func toggleColors() {
+    private func changesColorsCell() {
         if isActive {
             backgroundColor = CommonColor.customBlack
             infoCellLabel.textColor = .white
@@ -75,5 +75,13 @@ final class CollectionViewCell: UICollectionViewCell {
             infoCellLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             infoCellLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
+    }
+}
+
+// MARK: - Metrics
+
+extension CollectionViewCell {
+    enum Metrics {
+        static let cellCornerRadius : CGFloat =  12
     }
 }

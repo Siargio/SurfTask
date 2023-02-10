@@ -12,7 +12,7 @@
 		ECC65E3629914A6E00BC8CB5 /* CollectionViewSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC65E3529914A6E00BC8CB5 /* CollectionViewSecond.swift */; };
 		ECC73222298FA08C000B4430 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC73221298FA08C000B4430 /* Model.swift */; };
 		ECE9C2CC298F0889009180C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE9C2CB298F0889009180C5 /* AppDelegate.swift */; };
-		ECE9C2D0298F0889009180C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE9C2CF298F0889009180C5 /* ViewController.swift */; };
+		ECE9C2D0298F0889009180C5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE9C2CF298F0889009180C5 /* MainViewController.swift */; };
 		ECE9C2D5298F088A009180C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECE9C2D4298F088A009180C5 /* Assets.xcassets */; };
 		ECE9C2D8298F088A009180C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECE9C2D6298F088A009180C5 /* LaunchScreen.storyboard */; };
 		ECE9C2EA298F0C64009180C5 /* CommonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE9C2E9298F0C64009180C5 /* CommonColor.swift */; };
@@ -34,7 +34,7 @@
 		ECC73221298FA08C000B4430 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		ECE9C2C8298F0889009180C5 /* SurfTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SurfTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECE9C2CB298F0889009180C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ECE9C2CF298F0889009180C5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ECE9C2CF298F0889009180C5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		ECE9C2D4298F088A009180C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECE9C2D7298F088A009180C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECE9C2D9298F088A009180C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		ECE9C2E5298F09D9009180C5 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				ECE9C2CF298F0889009180C5 /* ViewController.swift */,
+				ECE9C2CF298F0889009180C5 /* MainViewController.swift */,
 				ECE9C2F1298F0CF2009180C5 /* PresentationViewController.swift */,
 				ECE9C2F9298F1100009180C5 /* CollectionView.swift */,
 				ECC65E3529914A6E00BC8CB5 /* CollectionViewSecond.swift */,
@@ -264,7 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECE9C2D0298F0889009180C5 /* ViewController.swift in Sources */,
+				ECE9C2D0298F0889009180C5 /* MainViewController.swift in Sources */,
 				ECE9C2EC298F0C89009180C5 /* UIColor+Ext.swift in Sources */,
 				ECE9C2FD298F11D4009180C5 /* CollectionViewCell.swift in Sources */,
 				ECE9C2EA298F0C64009180C5 /* CommonColor.swift in Sources */,
