@@ -92,7 +92,7 @@ final class PresentationView: UIView {
     }
 
     private func setupLayout() {
-        bottomHeight = presentationView.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: Metrics.heightButton)
+        bottomHeight = presentationView.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: Metrics.bottomHeight)
 
         NSLayoutConstraint.activate([
             backgroundImage.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -153,7 +153,7 @@ extension PresentationView {
         static let sizeFontDisplayBold: CGFloat = 24
         static let viewCornerRadius: CGFloat = 32
         static let alpha: CGFloat = 0
-        static let bottomHeight: CGFloat = 40
+        static let bottomHeight: CGFloat = 66
         static let heightFirstCollectionView: CGFloat = 0.055
         static let heightSecondCollectionView: CGFloat = 0.125
     }
