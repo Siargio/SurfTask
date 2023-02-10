@@ -1,13 +1,13 @@
 //
-//  CollectionView.swift
+//  CollectionViewSecond.swift
 //  SurfTask
 //
-//  Created by Sergio on 5.02.23.
+//  Created by Sergio on 6.02.23.
 //
 
 import UIKit
 
-final class CollectionView: UIView {
+final class CollectionViewSecond: UIView {
 
     // MARK: - Properties
 
@@ -15,12 +15,13 @@ final class CollectionView: UIView {
 
     // MARK: - UIElements
 
-    private let collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = Metrics.minimumInteritemSpacing
+        layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
+        collectionView.alpha = Metrics.alpha
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -56,8 +57,8 @@ final class CollectionView: UIView {
 
 // MARK: - UICollectionViewDataSource
 
-extension CollectionView: UICollectionViewDataSource {
-    
+extension CollectionViewSecond: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         modelArray.count
     }
@@ -66,6 +67,7 @@ extension CollectionView: UICollectionViewDataSource {
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as? CollectionViewCell else {
         return UICollectionViewCell()
+
         }
         cell.infoCellLabel.text = modelArray[indexPath.item]
         return cell
@@ -74,7 +76,7 @@ extension CollectionView: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 
-extension CollectionView: UICollectionViewDelegate {
+extension CollectionViewSecond: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedItem = modelArray[indexPath.item]
@@ -89,19 +91,19 @@ extension CollectionView: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension CollectionView: UICollectionViewDelegateFlowLayout {
+extension CollectionViewSecond: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let item = modelArray[indexPath.item]
-        return CGSize(width: item.size(withAttributes: [NSAttributedString.Key.font : UIFont.proDisplayMedium14() ?? Strings.fallbackFont]).width + Metrics.additionalWidth, height: frame.height)
+        return CGSize(width: item.size(withAttributes: [NSAttributedString.Key.font : UIFont.proDisplayMedium14() ?? Strings.fallbackFont]).width + Metrics.additionalWidth, height: frame.height / Metrics.heightDivision)
     }
 }
 
 // MARK: - SetupLayout
 
-extension CollectionView {
-    
+extension CollectionViewSecond {
+
     private func setupLayout() {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor),
@@ -114,10 +116,12 @@ extension CollectionView {
 
 // MARK: - Metrics
 
-extension CollectionView {
+extension CollectionViewSecond {
     enum Metrics {
-        static let minimumInteritemSpacing : CGFloat =  12
+        static let minimumInteritemSpacing: CGFloat =  12
+        static let alpha: CGFloat = 0
         static let additionalWidth: CGFloat = 48
+        static let heightDivision: CGFloat = 2.3
     }
 
     enum Strings {

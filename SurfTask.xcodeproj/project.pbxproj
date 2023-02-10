@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ECBFA37F2996856B00D1CC94 /* ModelRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBFA37E2996856B00D1CC94 /* ModelRecognizer.swift */; };
+		ECBFA3812996864A00D1CC94 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBFA3802996864A00D1CC94 /* UIView+Ext.swift */; };
 		ECC42306299248BD000B5CD3 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC42305299248BD000B5CD3 /* AlertModel.swift */; };
 		ECC4230829925C08000B5CD3 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4230729925C08000B5CD3 /* UIButton+Ext.swift */; };
 		ECC65E3629914A6E00BC8CB5 /* CollectionViewSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC65E3529914A6E00BC8CB5 /* CollectionViewSecond.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ECBFA37E2996856B00D1CC94 /* ModelRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRecognizer.swift; sourceTree = "<group>"; };
+		ECBFA3802996864A00D1CC94 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		ECC42305299248BD000B5CD3 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		ECC4230729925C08000B5CD3 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		ECC65E3529914A6E00BC8CB5 /* CollectionViewSecond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSecond.swift; sourceTree = "<group>"; };
@@ -61,11 +65,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ECA4F48D29969ED400F9133C /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				ECE9C2F1298F0CF2009180C5 /* PresentationViewController.swift */,
+				ECE9C2F9298F1100009180C5 /* CollectionView.swift */,
+				ECC65E3529914A6E00BC8CB5 /* CollectionViewSecond.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
 		ECC73220298FA07D000B4430 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				ECC73221298FA08C000B4430 /* Model.swift */,
 				ECC42305299248BD000B5CD3 /* AlertModel.swift */,
+				ECBFA37E2996856B00D1CC94 /* ModelRecognizer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -113,6 +128,7 @@
 				ECE9C2ED298F0CB2009180C5 /* UIFont+Ext.swift */,
 				ECE9C2EF298F0CC3009180C5 /* UILabel+Ext.swift */,
 				ECC4230729925C08000B5CD3 /* UIButton+Ext.swift */,
+				ECBFA3802996864A00D1CC94 /* UIView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -148,9 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				ECE9C2CF298F0889009180C5 /* MainViewController.swift */,
-				ECE9C2F1298F0CF2009180C5 /* PresentationViewController.swift */,
-				ECE9C2F9298F1100009180C5 /* CollectionView.swift */,
-				ECC65E3529914A6E00BC8CB5 /* CollectionViewSecond.swift */,
+				ECA4F48D29969ED400F9133C /* MainView */,
 				ECE9C2FB298F11C0009180C5 /* Cell */,
 			);
 			path = Main;
@@ -266,6 +280,7 @@
 			files = (
 				ECE9C2D0298F0889009180C5 /* MainViewController.swift in Sources */,
 				ECE9C2EC298F0C89009180C5 /* UIColor+Ext.swift in Sources */,
+				ECBFA3812996864A00D1CC94 /* UIView+Ext.swift in Sources */,
 				ECE9C2FD298F11D4009180C5 /* CollectionViewCell.swift in Sources */,
 				ECE9C2EA298F0C64009180C5 /* CommonColor.swift in Sources */,
 				ECC42306299248BD000B5CD3 /* AlertModel.swift in Sources */,
@@ -275,6 +290,7 @@
 				ECE9C2F0298F0CC3009180C5 /* UILabel+Ext.swift in Sources */,
 				ECC4230829925C08000B5CD3 /* UIButton+Ext.swift in Sources */,
 				ECE9C2F2298F0CF2009180C5 /* PresentationViewController.swift in Sources */,
+				ECBFA37F2996856B00D1CC94 /* ModelRecognizer.swift in Sources */,
 				ECE9C2FA298F1100009180C5 /* CollectionView.swift in Sources */,
 				ECE9C2EE298F0CB2009180C5 /* UIFont+Ext.swift in Sources */,
 			);
