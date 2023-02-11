@@ -27,6 +27,7 @@
 		ECE9C2F8298F0D95009180C5 /* SF-Pro-Display-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECE9C2F7298F0D95009180C5 /* SF-Pro-Display-Regular.ttf */; };
 		ECE9C2FA298F1100009180C5 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE9C2F9298F1100009180C5 /* CollectionView.swift */; };
 		ECE9C2FD298F11D4009180C5 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE9C2FC298F11D4009180C5 /* CollectionViewCell.swift */; };
+		ECF40FF729980D5A00BDFAB6 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF40FF629980D5A00BDFAB6 /* UIImageView+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		ECE9C2F7298F0D95009180C5 /* SF-Pro-Display-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.ttf"; sourceTree = "<group>"; };
 		ECE9C2F9298F1100009180C5 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		ECE9C2FC298F11D4009180C5 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		ECF40FF629980D5A00BDFAB6 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				ECE9C2EF298F0CC3009180C5 /* UILabel+Ext.swift */,
 				ECC4230729925C08000B5CD3 /* UIButton+Ext.swift */,
 				ECBFA3802996864A00D1CC94 /* UIView+Ext.swift */,
+				ECF40FF629980D5A00BDFAB6 /* UIImageView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				ECC42306299248BD000B5CD3 /* AlertModel.swift in Sources */,
 				ECE9C2CC298F0889009180C5 /* AppDelegate.swift in Sources */,
 				ECC73222298FA08C000B4430 /* Model.swift in Sources */,
+				ECF40FF729980D5A00BDFAB6 /* UIImageView+Ext.swift in Sources */,
 				ECC65E3629914A6E00BC8CB5 /* CollectionViewSecond.swift in Sources */,
 				ECE9C2F0298F0CC3009180C5 /* UILabel+Ext.swift in Sources */,
 				ECC4230829925C08000B5CD3 /* UIButton+Ext.swift in Sources */,

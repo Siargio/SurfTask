@@ -15,35 +15,13 @@ final class PresentationView: UIView {
 
     // MARK: - UIElements
 
-    private let backgroundImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = Strings.backgroundImage
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-
-    lazy var presentationView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = Metrics.viewCornerRadius
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    let doYouWantLabel = UILabel(
-        textAlignment: .center,
-        text: Strings.doYouWantButtonText,
-        font: .proDisplayRegular14(),
-        textColor: CommonColor.customGrayTex)
+    lazy var presentationView = UIView(
+        cornerRadius: Metrics.viewCornerRadius,
+        backgroundColor: .white)
 
     lazy var joinButton = UIButton(
         text: Strings.joinButtonText,
         font: .proDisplayMedium16())
-
-    let titleLabel = UILabel(
-        text: Strings.titleLabelText,
-        font: .proDisplayBold24(),
-        textColor: CommonColor.customBlack)
 
     let descriptionInfoLabel = UILabel(
         text: Strings.descriptionInfoLabel,
@@ -61,6 +39,19 @@ final class PresentationView: UIView {
         return recognizer
     }()
 
+    private let backgroundImage = UIImageView(imageView: Strings.backgroundImage)
+
+    private let doYouWantLabel = UILabel(
+        textAlignment: .center,
+        text: Strings.doYouWantButtonText,
+        font: .proDisplayRegular14(),
+        textColor: CommonColor.customGrayTex)
+
+    private let titleLabel = UILabel(
+        text: Strings.titleLabelText,
+        font: .proDisplayBold24(),
+        textColor: CommonColor.customBlack)
+
     // MARK: - LifeCycle
 
     override init(frame: CGRect) {
@@ -71,7 +62,7 @@ final class PresentationView: UIView {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Strings.error)
     }
 
     // MARK: - Setup
@@ -165,5 +156,6 @@ extension PresentationView {
         static let descriptionInfoSecondLabel = "Получай стипендию, выстраивай удобный график, работай на современном железе."
         static let doYouWantButtonText = "Хочешь к нам?"
         static let joinButtonText = "Отправить заявку"
+        static let error = "init(coder:) has not been implemented"
     }
 }
