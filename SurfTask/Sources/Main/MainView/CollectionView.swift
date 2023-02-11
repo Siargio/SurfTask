@@ -22,6 +22,7 @@ final class CollectionView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -37,7 +38,7 @@ final class CollectionView: UIView {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Strings.error)
     }
 
     // MARK: - Setup
@@ -122,5 +123,6 @@ extension CollectionView {
 
     enum Strings {
         static let fallbackFont = "Avenir Next"
+        static let error = "init(coder:) has not been implemented"
     }
 }

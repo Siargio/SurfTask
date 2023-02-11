@@ -31,7 +31,7 @@ final class MainViewController: UIViewController {
 
     // MARK: - Setup
 
-    func setupTarget() {
+    private func setupTarget() {
         customView.joinButton.addTarget(self, action: #selector(joinButtonTap), for: .touchUpInside)
 
         customView.recognizer.addTarget(self, action: #selector(movement(_:)))
@@ -53,6 +53,8 @@ final class MainViewController: UIViewController {
             button.tintColor = CommonColor.customGrayTex
         }
     }
+
+    // MARK: - recognizer
 
     @objc private func movement(_ recognizer: UIPanGestureRecognizer) {
 

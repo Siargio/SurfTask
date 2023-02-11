@@ -30,7 +30,7 @@ final class CollectionViewCell: UICollectionViewCell {
     // MARK: - UIElements
 
     let infoCellLabel = UILabel(
-        text: "IOS",
+        text: Strings.ios,
         font: .proDisplayMedium14(),
         textColor: CommonColor.customBlack)
 
@@ -45,7 +45,7 @@ final class CollectionViewCell: UICollectionViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Strings.error)
     }
 
     // MARK: - Setup
@@ -83,5 +83,10 @@ final class CollectionViewCell: UICollectionViewCell {
 extension CollectionViewCell {
     enum Metrics {
         static let cellCornerRadius : CGFloat =  12
+    }
+
+    enum Strings {
+        static let error = "init(coder:) has not been implemented"
+        static let ios = "IOS"
     }
 }
